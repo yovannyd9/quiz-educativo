@@ -167,6 +167,8 @@
 
             const quizDiv = document.getElementById("quiz");
             const pregunta = preguntas[preguntaActual];
+            
+            const opcionesMezcladas = mezclarOpciones(pregunta.opciones);
 
             quizDiv.innerHTML = `
                 <div class="pregunta">
