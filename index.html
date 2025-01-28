@@ -2,101 +2,174 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Juego de Preguntas para la Clase</title>
+    <title>Quiz de Juan Pablo Duarte</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             text-align: center;
-            background-color: #f0f0f0;
+            background: linear-gradient(to right, #002D62, #CE1126); /* Colores bandera RD */
+            color: white;
             padding: 20px;
         }
         .pregunta {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
             margin: 20px auto;
             max-width: 600px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            color: #002D62;
         }
         button {
-            padding: 10px 20px;
-            margin: 5px;
-            background: #4CAF50;
+            padding: 12px 25px;
+            margin: 10px;
+            background: #CE1126;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
+            transition: transform 0.2s;
         }
         button:hover {
-            background: #45a049;
+            transform: scale(1.05);
+            background: #A50021;
         }
         #resultado {
             font-size: 24px;
-            color: #2c3e50;
             margin-top: 20px;
+        }
+        #tiempo {
+            font-size: 20px;
+            color: #FFD700;
+        }
+        .imagen-pregunta {
+            width: 200px;
+            border-radius: 10px;
+            margin: 15px;
+        }
+        .progreso {
+            width: 80%;
+            height: 10px;
+            background: #ddd;
+            margin: 20px auto;
+            border-radius: 5px;
+        }
+        .barra-progreso {
+            height: 100%;
+            background: #FFD700;
+            width: 0%;
+            transition: width 0.5s;
         }
     </style>
 </head>
 <body>
-    <h1>Quiz de Ciencias 🌍</h1>
+    <h1>⭐ ¡Conoce a Juan Pablo Duarte! ⭐</h1>
+    <div id="tiempo">Tiempo restante: <span id="contador">30</span>s</div>
+    <div class="progreso"><div class="barra-progreso" id="barra"></div></div>
     <div id="quiz"></div>
     <div id="resultado"></div>
 
     <script>
         const preguntas = [
             {
-                pregunta: "¿Cuál es el planeta más grande del sistema solar?",
-                opciones: ["Marte", "Júpiter", "Venus"],
-                respuestaCorrecta: "Júpiter"
+                pregunta: "¿En qué año nació Juan Pablo Duarte?",
+                opciones: ["1813", "1822", "1801"],
+                respuestaCorrecta: "1813",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Juan_Pablo_Duarte.jpg/220px-Juan_Pablo_Duarte.jpg"
             },
             {
-                pregunta: "¿Qué gas absorben las plantas durante la fotosíntesis?",
-                opciones: ["Oxígeno", "Nitrógeno", "Dióxido de carbono"],
-                respuestaCorrecta: "Dióxido de carbono"
+                pregunta: "¿Qué sociedad secreta fundó Duarte para luchar por la independencia?",
+                opciones: ["Los Trinitarios", "La Filantrópica", "Los Libertadores"],
+                respuestaCorrecta: "Los Trinitarios",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Bandera_de_La_Trinitaria.svg/1200px-Bandera_de_La_Trinitaria.svg.png"
             },
             {
-                pregunta: "¿Qué elemento químico tiene el símbolo 'O'?",
-                opciones: ["Oro", "Oxígeno", "Osmio"],
-                respuestaCorrecta: "Oxígeno"
+                pregunta: "¿Cuál era el lema de los Trinitarios?",
+                opciones: ["Dios, Patria y Libertad", "Unión, Paz y Trabajo", "Libertad o Muerte"],
+                respuestaCorrecta: "Dios, Patria y Libertad",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Escudo_de_armas_de_la_República_Dominicana.svg/200px-Escudo_de_armas_de_la_República_Dominicana.svg.png"
             }
         ];
 
         let preguntaActual = 0;
         let puntaje = 0;
+        let tiempoRestante = 30;
+        let intervalo;
+
+        function empezarTemporizador() {
+            intervalo = setInterval(() => {
+                tiempoRestante--;
+                document.getElementById("contador").textContent = tiempoRestante;
+                if (tiempoRestante <= 0) {
+                    clearInterval(intervalo);
+                    verificarRespuesta(""); // Tiempo agotado
+                }
+            }, 1000);
+        }
 
         function mostrarPregunta() {
+            clearInterval(intervalo);
+            tiempoRestante = 30;
+            document.getElementById("contador").textContent = tiempoRestante;
+            empezarTemporizador();
+
             const quizDiv = document.getElementById("quiz");
             const pregunta = preguntas[preguntaActual];
 
             quizDiv.innerHTML = `
                 <div class="pregunta">
                     <h3>${pregunta.pregunta}</h3>
-                    ${pregunta.opciones.map(opcion => `
+                    ${pregunta.imagen ? `<img src="${pregunta.imagen}" class="imagen-pregunta">` : ''}
+                    <div>${pregunta.opciones.map(opcion => `
                         <button onclick="verificarRespuesta('${opcion}')">${opcion}</button>
-                    `).join("")}
+                    `).join("")}</div>
                 </div>
             `;
+
+            // Actualizar barra de progreso
+            document.getElementById("barra").style.width = `${(preguntaActual / preguntas.length) * 100}%`;
         }
 
         function verificarRespuesta(opcion) {
+            clearInterval(intervalo);
             const pregunta = preguntas[preguntaActual];
+            let esCorrecta = false;
+
             if (opcion === pregunta.respuestaCorrecta) {
                 puntaje++;
+                esCorrecta = true;
             }
 
-            preguntaActual++;
-            if (preguntaActual < preguntas.length) {
-                mostrarPregunta();
-            } else {
-                mostrarResultado();
-            }
+            // Animación de feedback
+            const botones = document.querySelectorAll("button");
+            botones.forEach(boton => {
+                if (boton.textContent === pregunta.respuestaCorrecta) {
+                    boton.style.background = "#4CAF50"; // Verde para la respuesta correcta
+                } else if (boton.textContent === opcion && !esCorrecta) {
+                    boton.style.background = "#ff4444"; // Rojo para respuesta incorrecta
+                }
+                boton.disabled = true;
+            });
+
+            setTimeout(() => {
+                preguntaActual++;
+                if (preguntaActual < preguntas.length) {
+                    mostrarPregunta();
+                } else {
+                    mostrarResultado();
+                }
+            }, 2000); // Espera 2 segundos antes de pasar a la siguiente pregunta
         }
 
         function mostrarResultado() {
             document.getElementById("quiz").innerHTML = "";
+            document.getElementById("barra").style.width = "100%";
             document.getElementById("resultado").innerHTML = `
-                <h2>¡Juego terminado! 🎉</h2>
+                <h2>¡Quiz completado! 🎉</h2>
                 <p>Tu puntaje: ${puntaje} de ${preguntas.length}</p>
+                ${puntaje === preguntas.length ? 
+                    '<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Flag_of_the_Dominican_Republic.svg/320px-Flag_of_the_Dominican_Republic.svg.png" width="150">' : 
+                    '<p>¡Sigue aprendiendo sobre Duarte!</p>'}
             `;
         }
 
@@ -105,4 +178,3 @@
     </script>
 </body>
 </html>
-
