@@ -7,7 +7,7 @@
         body {
             font-family: 'Arial', sans-serif;
             text-align: center;
-            background: linear-gradient(to right, #002D62, #CE1126); /* Colores bandera RD */
+            background: linear-gradient(to right, #002D62, #CE1126);
             color: white;
             padding: 20px;
         }
@@ -71,77 +71,76 @@
 
     <script>
         function mezclarOpciones(array) {
-    // Copia el array para no modificar el original
-    const copia = [...array];
-    // Algoritmo de Fisher-Yates para mezclar
-    for (let i = copia.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [copia[i], copia[j]] = [copia[j], copia[i]];
-    }
-    return copia;
-}
+            const copia = [...array];
+            for (let i = copia.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copia[i], copia[j]] = [copia[j], copia[i]];
+            }
+            return copia;
+        }
+
         const preguntas = [
-    {
-        pregunta: "¿En qué año nació Juan Pablo Duarte?",
-        opciones: ["1813", "1798", "1822"],
-        respuestaCorrecta: "1813",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Juan_Pablo_Duarte.jpg"
-    },
-    {
-        pregunta: "¿Cuál fue el nombre de la sociedad secreta fundada por Duarte para luchar por la independencia?",
-        opciones: ["Los Trinitarios", "La Filantrópica", "Los Libertadores"],
-        respuestaCorrecta: "Los Trinitarios",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Bandera_de_La_Trinitaria.svg"
-    },
-    {
-        pregunta: "¿Cuál es el lema de los Trinitarios?",
-        opciones: ["Dios, Patria y Libertad", "Unión, Paz y Trabajo", "Libertad o Muerte"],
-        respuestaCorrecta: "Dios, Patria y Libertad",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/8/84/Escudo_de_armas_de_la_República_Dominicana.svg"
-    },
-    {
-        pregunta: "¿En qué ciudad nació Juan Pablo Duarte?",
-        opciones: ["Santo Domingo", "Caracas", "Santiago de los Caballeros"],
-        respuestaCorrecta: "Santo Domingo",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Casa_de_Juan_Pablo_Duarte.jpg"
-    },
-    {
-        pregunta: "¿Qué fecha se proclamó la independencia de República Dominicana?",
-        opciones: ["27 de febrero de 1844", "16 de agosto de 1863", "12 de octubre de 1492"],
-        respuestaCorrecta: "27 de febrero de 1844",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_the_Dominican_Republic.svg"
-    },
-    {
-        pregunta: "¿A qué país fue exiliado Duarte tras la independencia?",
-        opciones: ["Venezuela", "España", "México"],
-        respuestaCorrecta: "Venezuela",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/0/06/Juan_Pablo_Duarte_en_Venezuela.jpg"
-    },
-    {
-        pregunta: "¿Cómo se llamaban los padres de Juan Pablo Duarte?",
-        opciones: ["Juan José Duarte y Manuela Díez", "Pedro Santana y Ana Valverde", "Simón Bolívar y María Teresa"],
-        respuestaCorrecta: "Juan José Duarte y Manuela Díez",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Casa_de_la_Familia_Duarte-Diez.jpg"
-    },
-    {
-        pregunta: "¿Qué ideal defendía Duarte para la nueva nación?",
-        opciones: ["Soberanía popular y democracia", "Monarquía hereditaria", "Colonialismo moderno"],
-        respuestaCorrecta: "Soberanía popular y democracia",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Juan_Pablo_Duarte_Estatua.jpg"
-    },
-    {
-        pregunta: "¿En qué año murió Juan Pablo Duarte?",
-        opciones: ["1876", "1850", "1898"],
-        respuestaCorrecta: "1876",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Mausoleo_de_los_Próceres_en_Santo_Domingo.jpg"
-    },
-    {
-        pregunta: "¿Qué frase emblemática dijo Duarte sobre la patria?",
-        opciones: ["¡Vivir sin patria, es lo mismo que vivir sin honor!", "La unión hace la fuerza", "Patria o muerte"],
-        respuestaCorrecta: "¡Vivir sin patria, es lo mismo que vivir sin honor!",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Plaza_Duarte_en_Santo_Domingo.jpg"
-    }
-];
+            {
+                pregunta: "¿En qué año nació Juan Pablo Duarte?",
+                opciones: ["1813", "1798", "1822"],
+                respuestaCorrecta: "1813",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Juan_Pablo_Duarte.jpg"
+            },
+            {
+                pregunta: "¿Cuál fue el nombre de la sociedad secreta fundada por Duarte para luchar por la independencia?",
+                opciones: ["Los Trinitarios", "La Filantrópica", "Los Libertadores"],
+                respuestaCorrecta: "Los Trinitarios",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Bandera_de_La_Trinitaria.svg"
+            },
+            {
+                pregunta: "¿Cuál es el lema de los Trinitarios?",
+                opciones: ["Dios, Patria y Libertad", "Unión, Paz y Trabajo", "Libertad o Muerte"],
+                respuestaCorrecta: "Dios, Patria y Libertad",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/8/84/Escudo_de_armas_de_la_República_Dominicana.svg"
+            },
+            {
+                pregunta: "¿En qué ciudad nació Juan Pablo Duarte?",
+                opciones: ["Santo Domingo", "Caracas", "Santiago de los Caballeros"],
+                respuestaCorrecta: "Santo Domingo",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Casa_de_Juan_Pablo_Duarte.jpg"
+            },
+            {
+                pregunta: "¿Qué fecha se proclamó la independencia de República Dominicana?",
+                opciones: ["27 de febrero de 1844", "16 de agosto de 1863", "12 de octubre de 1492"],
+                respuestaCorrecta: "27 de febrero de 1844",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_the_Dominican_Republic.svg"
+            },
+            {
+                pregunta: "¿A qué país fue exiliado Duarte tras la independencia?",
+                opciones: ["Venezuela", "España", "México"],
+                respuestaCorrecta: "Venezuela",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/0/06/Juan_Pablo_Duarte_en_Venezuela.jpg"
+            },
+            {
+                pregunta: "¿Cómo se llamaban los padres de Juan Pablo Duarte?",
+                opciones: ["Juan José Duarte y Manuela Díez", "Pedro Santana y Ana Valverde", "Simón Bolívar y María Teresa"],
+                respuestaCorrecta: "Juan José Duarte y Manuela Díez",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Casa_de_la_Familia_Duarte-Diez.jpg"
+            },
+            {
+                pregunta: "¿Qué ideal defendía Duarte para la nueva nación?",
+                opciones: ["Soberanía popular y democracia", "Monarquía hereditaria", "Colonialismo moderno"],
+                respuestaCorrecta: "Soberanía popular y democracia",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Juan_Pablo_Duarte_Estatua.jpg"
+            },
+            {
+                pregunta: "¿En qué año murió Juan Pablo Duarte?",
+                opciones: ["1876", "1850", "1898"],
+                respuestaCorrecta: "1876",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Mausoleo_de_los_Próceres_en_Santo_Domingo.jpg"
+            },
+            {
+                pregunta: "¿Qué frase emblemática dijo Duarte sobre la patria?",
+                opciones: ["¡Vivir sin patria, es lo mismo que vivir sin honor!", "La unión hace la fuerza", "Patria o muerte"],
+                respuestaCorrecta: "¡Vivir sin patria, es lo mismo que vivir sin honor!",
+                imagen: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Plaza_Duarte_en_Santo_Domingo.jpg"
+            }
+        ];
 
         let preguntaActual = 0;
         let puntaje = 0;
@@ -154,7 +153,7 @@
                 document.getElementById("contador").textContent = tiempoRestante;
                 if (tiempoRestante <= 0) {
                     clearInterval(intervalo);
-                    verificarRespuesta(""); // Tiempo agotado
+                    verificarRespuesta("");
                 }
             }, 1000);
         }
@@ -167,20 +166,18 @@
 
             const quizDiv = document.getElementById("quiz");
             const pregunta = preguntas[preguntaActual];
-            
-            const opcionesMezcladas = mezclarOpciones(pregunta.opciones);
+            const opcionesMezcladas = mezclarOpciones(pregunta.opciones); // Mezcla las opciones
 
             quizDiv.innerHTML = `
                 <div class="pregunta">
                     <h3>${pregunta.pregunta}</h3>
                     ${pregunta.imagen ? `<img src="${pregunta.imagen}" class="imagen-pregunta">` : ''}
-                    <div>${pregunta.opciones.map(opcion => `
+                    <div>${opcionesMezcladas.map(opcion => ` <!-- Usa las opciones mezcladas -->
                         <button onclick="verificarRespuesta('${opcion}')">${opcion}</button>
                     `).join("")}</div>
                 </div>
             `;
 
-            // Actualizar barra de progreso
             document.getElementById("barra").style.width = `${(preguntaActual / preguntas.length) * 100}%`;
         }
 
@@ -194,13 +191,12 @@
                 esCorrecta = true;
             }
 
-            // Animación de feedback
             const botones = document.querySelectorAll("button");
             botones.forEach(boton => {
                 if (boton.textContent === pregunta.respuestaCorrecta) {
-                    boton.style.background = "#4CAF50"; // Verde para la respuesta correcta
+                    boton.style.background = "#4CAF50";
                 } else if (boton.textContent === opcion && !esCorrecta) {
-                    boton.style.background = "#ff4444"; // Rojo para respuesta incorrecta
+                    boton.style.background = "#ff4444";
                 }
                 boton.disabled = true;
             });
@@ -212,7 +208,7 @@
                 } else {
                     mostrarResultado();
                 }
-            }, 2000); // Espera 2 segundos antes de pasar a la siguiente pregunta
+            }, 2000);
         }
 
         function mostrarResultado() {
@@ -227,7 +223,6 @@
             `;
         }
 
-        // Iniciar el juego al cargar la página
         mostrarPregunta();
     </script>
 </body>
