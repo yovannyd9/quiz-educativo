@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Preguntas para la Clase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .pregunta {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #resultado {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz de Ciencias 🌍</h1>
+    <div id="quiz"></div>
+    <div id="resultado"></div>
+
+    <script>
+        const preguntas = [
+            {
+                pregunta: "¿Cuál es el planeta más grande del sistema solar?",
+                opciones: ["Marte", "Júpiter", "Venus"],
+                respuestaCorrecta: "Júpiter"
+            },
+            {
+                pregunta: "¿Qué gas absorben las plantas durante la fotosíntesis?",
+                opciones: ["Oxígeno", "Nitrógeno", "Dióxido de carbono"],
+                respuestaCorrecta: "Dióxido de carbono"
+            },
+            {
+                pregunta: "¿Qué elemento químico tiene el símbolo 'O'?",
+                opciones: ["Oro", "Oxígeno", "Osmio"],
+                respuestaCorrecta: "Oxígeno"
+            }
+        ];
+
+        let preguntaActual = 0;
+        let puntaje = 0;
+
+        function mostrarPregunta() {
+            const quizDiv = document.getElementById("quiz");
+            const pregunta = preguntas[preguntaActual];
+
+            quizDiv.innerHTML = `
+                <div class="pregunta">
+                    <h3>${pregunta.pregunta}</h3>
+                    ${pregunta.opciones.map(opcion => `
+                        <button onclick="verificarRespuesta('${opcion}')">${opcion}</button>
+                    `).join("")}
+                </div>
+            `;
+        }
+
+        function verificarRespuesta(opcion) {
+            const pregunta = preguntas[preguntaActual];
+            if (opcion === pregunta.respuestaCorrecta) {
+                puntaje++;
+            }
+
+            preguntaActual++;
+            if (preguntaActual < preguntas.length) {
+                mostrarPregunta();
+            } else {
+                mostrarResultado();
+            }
+        }
+
+        function mostrarResultado() {
+            document.getElementById("quiz").innerHTML = "";
+            document.getElementById("resultado").innerHTML = `
+                <h2>¡Juego terminado! 🎉</h2>
+                <p>Tu puntaje: ${puntaje} de ${preguntas.length}</p>
+            `;
+        }
+
+        // Iniciar el juego al cargar la página
+        mostrarPregunta();
+    </script>
+</body>
+</html>
+
